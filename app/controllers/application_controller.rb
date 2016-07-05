@@ -2,4 +2,38 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_app.root_path, alert: exception.message
+  end
+  
+  def get_categories
+    @categories = Category.all
+  end
+  
+  def order_in_progress
+    @order_in_progress ||= find_order_in_progress
+  end
+      
+  private
+  
+  def find_order_in_progress
+    @order_in_progress = find_by_session_or_user
+    if @order_in_progress.nil?
+      @order_in_progress = Order.create(user: current_user)
+      session[:order_id] = @order_in_progress.id
+    elsif current_user && @order_in_progress.user.nil?
+      @order_in_progress.update(user: current_user)
+    end
+    @order_in_progress
+  end
+  
+  def find_by_session_or_user
+    if session[:order_id]
+      Order.find_by(id: session[:order_id])
+    elsif current_user
+      current_user.orders.in_progress
+    end
+  end
+  
 end

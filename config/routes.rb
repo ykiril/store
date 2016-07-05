@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  root 'home#index'
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  devise_for :users, controllers: { sessions: 'devise/sessions' }
+  
+  resources :books, only: [:index, :show] do
+    resources :reviews, only: [:new, :create]
+  end
+  
+  resources :categories, only: [:show]
+  
+  resources :orders, only: [:show, :edit, :update] do
+    post :add_book, on: :collection
+  end
+  get '/cart', to: 'orders#edit', as: :cart
+  patch '/cart/empty', to: 'orders#empty', as: :empty_cart
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

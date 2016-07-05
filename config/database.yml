@@ -12,16 +12,20 @@ default: &default
 development:
   <<: *default
   database: store_development
-  host: localhost
+  # password: 'RG2016'
+  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: store_test
-  host: localhost
+  database: store_development
+  # password: 'RG2016'
+
 
 production:
   <<: *default
-  database: db/production.sqlite3 #should be change
+  #database: db/production.sqlite3 #should be change
+  database: store_development
+  # password: 'RG2016'
