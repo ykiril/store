@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703180034) do
+ActiveRecord::Schema.define(version: 20160711190811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,11 +112,13 @@ ActiveRecord::Schema.define(version: 20160703180034) do
     t.integer  "user_id"
     t.integer  "credit_card_id"
     t.integer  "coupon_id"
+    t.integer  "shipment_id"
   end
 
   add_index "orders", ["billing_address_id"], name: "index_orders_on_billing_address_id", using: :btree
   add_index "orders", ["coupon_id"], name: "index_orders_on_coupon_id", using: :btree
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
+  add_index "orders", ["shipment_id"], name: "index_orders_on_shipment_id", using: :btree
   add_index "orders", ["shipping_address_id"], name: "index_orders_on_shipping_address_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
@@ -132,6 +134,14 @@ ActiveRecord::Schema.define(version: 20160703180034) do
 
   add_index "reviews", ["book_id"], name: "index_reviews_on_book_id", using: :btree
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
+
+  create_table "shipments", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "price",       precision: 8, scale: 2
+    t.string   "description"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -149,6 +159,8 @@ ActiveRecord::Schema.define(version: 20160703180034) do
     t.integer  "shipping_address_id"
     t.integer  "billing_address_id"
     t.boolean  "admin",                  default: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["billing_address_id"], name: "index_users_on_billing_address_id", using: :btree
@@ -163,6 +175,7 @@ ActiveRecord::Schema.define(version: 20160703180034) do
   add_foreign_key "order_books", "orders"
   add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "credit_cards"
+  add_foreign_key "orders", "shipments"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"

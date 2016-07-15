@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+
+
   root 'home#index'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, controllers: { sessions: 'devise/sessions' }
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' } 
+  #controllers: { sessions: 'devise/sessions' }
   
   resources :books, only: [:index, :show] do
     resources :reviews, only: [:new, :create]
@@ -10,11 +13,15 @@ Rails.application.routes.draw do
   
   resources :categories, only: [:show]
   
-  resources :orders, only: [:show, :edit, :update] do
+  resources :orders, only: [:index, :show, :edit, :update] do
     post :add_book, on: :collection
   end
+  
+  resources :order_books, only: [:destroy]
+  resources :checkout, only: [:index, :show, :update]
+  
   get '/cart', to: 'orders#edit', as: :cart
-  patch '/cart/empty', to: 'orders#empty', as: :empty_cart
+  patch '/cart/empty', to: 'orders#empty_cart', as: :empty_cart
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

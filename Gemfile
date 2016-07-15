@@ -39,6 +39,9 @@ gem 'haml-rails'
 gem 'rails-assets-bootstrap-star-rating', source: 'https://rails-assets.org'
 gem 'cancancan'
 gem 'draper'
+gem 'rubocop'
+gem 'wicked'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

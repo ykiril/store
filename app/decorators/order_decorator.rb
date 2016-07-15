@@ -1,17 +1,12 @@
 class OrderDecorator < Draper::Decorator
-  delegate_all
+  include Draper::LazyHelpers
   
-  def order_empty?
-    Order.where(state: 'in_progress').count < 1
-  end
+  delegate_all
+  delegate :last_numbers, :expiration_date, to: :credit_card, prefix: true
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  decorates_association :credit_card
+  decorates_association :shipping_address
+  decorates_association :billing_address
+  decorates_association :order_items
 
 end

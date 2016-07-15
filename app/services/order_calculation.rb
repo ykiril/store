@@ -6,7 +6,7 @@ class OrderCalculation
   delegate :order_books, :shipment, :coupon, to: :order
   
   def books_total
-    order_books.inject(0) { |sum, book| (book.price * book.quantity) + sum }
+    order_books.inject(0) { |a, e| a + (e.price * e.quantity) }
   end
   
   def shipment_total

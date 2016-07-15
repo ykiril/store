@@ -6,4 +6,5 @@ class Book < ActiveRecord::Base
   # def self.best_sellers
 
   # end
+  
 end

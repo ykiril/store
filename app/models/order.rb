@@ -5,13 +5,23 @@ class Order < ActiveRecord::Base
   belongs_to :credit_card
   belongs_to :billing_address,  class_name: 'Address'
   belongs_to :shipping_address, class_name: 'Address'
+  belongs_to :shipment
   belongs_to :coupon
-  has_many :order_books, dependent: :destroy
+  has_many   :order_books, dependent: :destroy
   
   accepts_nested_attributes_for :order_books
   
-  validates :user, presence: true, uniqueness: true
+  validates :user,  presence: true, uniqueness: true
   validates :state, presence: true
+  
+  before_validation :set_coupon, if: 'code.present?'
+  after_update :update_order
+  
+  attr_accessor :code
+  
+  delegate :clear, :empty?, to: :order_books
+  delegate :discount,       to: :coupon,      prefix: true, allow_nil: true
+  delegate :name,           to: :shipment,    prefix: true, allow_nil: true
   
   aasm column: :state, whiny_transitions: false do
     state :in_progress, initial: true
@@ -60,7 +70,7 @@ class Order < ActiveRecord::Base
     )
   end
   
-
+  
   private
   
   def calculate_price

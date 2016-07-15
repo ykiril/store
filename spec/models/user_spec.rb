@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
   it "has unique email"
   it "is invalid without a name"
  
-  it "has many posts"
+  it { is_expected.to have_many(:orders) } 
  
   context ".admins" do
     it "returns list of admins"

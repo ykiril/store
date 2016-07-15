@@ -2,8 +2,8 @@
   %span.glyphicon.glyphicon-shopping-cart
   %span
     #{t('cart.cart')}:
-  - if current_order && !current_order.empty?
-    (#{current_order.order_items.count})
-    = number_to_currency(current_order.total)
+  - if order_in_progress && !order_in_progress.empty?
+    (#{order_in_progress.order_books.count})
+    = number_to_currency(order_in_progress.total)
   -else
     (#{t('cart.empty')})

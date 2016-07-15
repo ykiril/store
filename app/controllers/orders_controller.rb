@@ -1,11 +1,16 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:show]
+  before_action :check_order_in_progress, only: [:edit, :update]
+  
+  def index
+    @order = order_in_progress
+  end
   
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:id]).decorate
   end
   
   def edit
-    @order = Order.in_progress.decorate
   end
   
   def add_book
@@ -16,15 +21,30 @@ class OrdersController < ApplicationController
   end
   
   def update
+    if @order.update(order_params)
+      if params.key?(:checkout)
+        redirect_to checkout_index_path
+      else
+        redirect_to cart_path
+      end
+    else
+      render 'edit'
+    end
   end
   
   def empty_cart
+    order_in_progress.clear
+    redirect_to cart_path
   end
   
   private
   
+  def check_order_in_progress
+    @order = order_in_progress.decorate
+  end
+  
   def order_params
-    params.require(:order).permit(:coupon_code, order_items_attributes: [:id, :quantity])
+    params.require(:order).permit(:code, order_books_attributes: [:id, :quantity])
   end
 
 end
