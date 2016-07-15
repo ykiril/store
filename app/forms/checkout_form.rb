@@ -9,7 +9,7 @@ class CheckoutForm
                 :shipping_address_attributes,
                 :credit_card_attributes
                 
-  #validate :validate_children
+  validate :generate_errors
   
   def billing_address
     order.billing_address ||= order.user.try(:billing_address) || Address.new
@@ -59,6 +59,22 @@ class CheckoutForm
   
   def bind_payment
     credit_card.assign_attributes(credit_card_attributes)
+  end
+  
+  def generate_errors
+    case step
+    when :address
+      add_errors(billing_address.errors) if billing_address.invalid?
+      add_errors(shipping_address.errors) if shipping_address.invalid?
+    when :payment
+      add_errors(credit_card.errors) if credit_card.invalid?
+    end
+  end
+  
+  def add_errors(errors_items)
+    errors_items.each do |attribute, message|
+      errors.add(attribute, message)
+    end
   end
   
   def use_billing?
