@@ -10,6 +10,7 @@ class OrderCalculation
   end
   
   def shipment_total
+    byebug
     shipment ? shipment.price : 0
   end
   

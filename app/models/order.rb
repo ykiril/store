@@ -21,7 +21,7 @@ class Order < ActiveRecord::Base
   
   delegate :clear, :empty?, to: :order_books
   delegate :discount,       to: :coupon,      prefix: true, allow_nil: true
-  delegate :name, to: :shipment, prefix: true, allow_nil: true
+  # delegate :name,           to: :shipment,    prefix: true, allow_nil: true
   
   aasm column: :state, whiny_transitions: false do
     state :in_progress, initial: true
