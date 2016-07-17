@@ -5,7 +5,6 @@ FactoryGirl.define do
     password_confirmation 'qwerty12'
     provider nil
     uid nil
-    username 'test_user'
     billing_address nil
     shipping_address nil
   end

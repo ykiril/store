@@ -1,5 +1,7 @@
 class Book < ActiveRecord::Base
-  belongs_to :author
+  validates :title, :price, :in_stock, presence: true
+  
+  has_many :author
   belongs_to :category
   has_many :reviews
   has_many :order_books
@@ -12,5 +14,5 @@ class Book < ActiveRecord::Base
       .group(:id)
       .order('qty DESC')
   end
-  
+
 end
