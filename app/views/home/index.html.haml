@@ -1,2 +1,12 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+.col-md-12.book-slider
+  %ul.bxslider
+    - @best_books.each_with_index do |book, index|
+      %li 
+        = image_tag(book.image, class: 'image-responsive')
+        %h1= book.title 
+        by #{book.author}
+        %p= book.description
+        %p
+          %span.price= t('books.price')
+          = number_to_currency(book.price)
+        = render('books/cart_form', book: book)

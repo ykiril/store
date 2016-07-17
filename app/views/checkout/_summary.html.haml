@@ -4,14 +4,14 @@
     %tr
       %td= t('checkout.item_total')
       %td= number_to_currency(order_in_progress.subtotal)
-    - if order_in_progress.shipment
+    - if order_in_progress.shipment_id
       %tr
         %td= t('checkout.ship_price')
         %td= number_to_currency(order_in_progress.shipment_total)
     - if order_in_progress.coupon
       %tr
         %td= t('checkout.order_discount')
-        %td= number_to_currency(order_in_progress.discount)
+        %td= number_to_currency(order_in_progress.coupon_discount)
     %tr
       %td= t('checkout.order_total')
       %td= number_to_currency(order_in_progress.total)

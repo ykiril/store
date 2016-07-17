@@ -10,7 +10,7 @@ class OrderCalculation
   end
   
   def shipment_total
-    byebug
+    shipment = Shipment.find_by(id: @order.shipment_id)
     shipment ? shipment.price : 0
   end
   

@@ -25,16 +25,17 @@ class ApplicationController < ActionController::Base
       @order_in_progress = Order.create(user: current_user)
       session[:order_id] = @order_in_progress.id
     elsif current_user && @order_in_progress.user.nil?
-      @order_in_progress.update(user: current_user)
+      @order_in_progress.user = current_user
+      @order_in_progress.save
     end
     @order_in_progress
   end
   
   def find_by_session_or_user
-    if session[:order_id]
-      Order.find_by(id: session[:order_id])
-    elsif current_user
+    if current_user
       current_user.orders.in_progress
+    elsif session[:order_id]
+      Order.find_by(id: session[:order_id])
     end
   end
   

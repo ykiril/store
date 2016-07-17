@@ -50,7 +50,7 @@ en:
   sign_in: Sign in
   sign_up: Sign up
   menu_title: Shop by category
-  account:
+  user:
     orders:
       in_progress: In progress
       in_queue: Waiting for processing

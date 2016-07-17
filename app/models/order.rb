@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
   
   accepts_nested_attributes_for :order_books
   
-  validates :user,  presence: true, uniqueness: true
+  #validates :user,  presence: true, uniqueness: true
   validates :state, presence: true
   
   before_validation :set_coupon, if: 'code.present?'
@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   
   aasm column: :state, whiny_transitions: false do
     state :in_progress, initial: true
-    state :in_queue
+    state :in_queue, after_enter: :set_time_and_ref
     state :in_delivery
     state :delivered
     state :canceled
@@ -70,10 +70,27 @@ class Order < ActiveRecord::Base
     )
   end
   
+  def set_time_and_ref
+    touch(:completed_at)  
+    update(ref: ref_order)
+  end
+  
+  def set_coupon
+    coupon = Coupon.find_by(code: code)
+    if coupon && coupon.active?
+      self.coupon_id = coupon.id
+    else
+      errors.add(:base, 'Invalid coupon code')
+    end
+  end
   
   private
   
+  def ref_order
+    'R-%.6d' % id
+  end
+  
   def calculate_price
-    OrderCalculation.new(self)
+    @calculator ||= OrderCalculation.new(self)
   end
 end

@@ -13,4 +13,24 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.bxslider.min
 //= require_tree .
+
+$(document).ready(function(){
+  function sliderInit() {
+  	$('.bxslider').bxSlider({
+		  auto: true,
+		  pause: 5000
+		});
+  }
+	
+	sliderInit();
+	var url = window.location.pathname;
+	
+	$('ul.nav a').on('click', function() {
+			if (url == '/') {
+				sliderInit();
+			}		
+	})
+
+});
