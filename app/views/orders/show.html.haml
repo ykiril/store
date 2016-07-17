@@ -1,5 +1,5 @@
 %h1 
   Order
-  //= @order.number
+  = @order.ref
 
-= render('orders/order_details', order: @order)
+= render('shared/order_details', order: @order)
