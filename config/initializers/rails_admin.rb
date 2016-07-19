@@ -32,8 +32,6 @@ RailsAdmin.config do |config|
       except ['Order']
     end
 
-    config.excluded_models << User
-
     config.model 'Order' do
       edit do
         field :state, :enum do

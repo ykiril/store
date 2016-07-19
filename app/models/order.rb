@@ -30,7 +30,7 @@ class Order < ActiveRecord::Base
     state :delivered
     state :canceled
     
-    event :pay_order do
+    event :create_order do
       transitions from: :in_progress, to: :in_queue
     end
     

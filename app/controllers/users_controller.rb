@@ -11,7 +11,17 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:notice] = t('account.flashes.account_updated')
+      flash[:notice] = t('user.flashes.account_updated')
+      redirect_to edit_user_path
+    else
+      render :edit
+    end
+  end
+  
+  def update_password
+    if @user.update_with_password(user_params)
+      sign_in @user, bypass: true
+      flash[:notice] = t('user.flashes.password_updated')
       redirect_to edit_user_path
     else
       render :edit
@@ -36,11 +46,3 @@ class UsersController < ApplicationController
     %i(id first_name last_name address zip city phone country_id)
   end
 end
-
-# class Users::SessionsController < Devise::SessionsController
-#   def create
-#     super do |resource|
-#       BackgroundWorker.trigger(resource)
-#     end
-#   end
-# end

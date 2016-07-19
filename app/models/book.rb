@@ -7,6 +7,7 @@ class Book < ActiveRecord::Base
   has_many :order_books
   
   mount_uploader :image, ImageUploader  
+  paginates_per 9
 
   def self.best_books
     joins(:order_books)

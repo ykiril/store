@@ -32,10 +32,10 @@ class ApplicationController < ActionController::Base
   end
   
   def find_by_session_or_user
-    if current_user
-      current_user.orders.in_progress
-    elsif session[:order_id]
+    if session[:order_id]
       Order.find_by(id: session[:order_id])
+    elsif current_user
+      current_user.orders.in_progress
     end
   end
   

@@ -8,3 +8,21 @@
 require 'ffaker'
 
 20.times { Country.create!(name: FFaker::Address.country) }
+
+# 20.times do
+#     title = FFaker::CheesyLingo.title
+#     description = FFaker::LoremFR.paragraph(5)
+#     price = rand(1..50)
+#     in_stock = rand(1..50)
+#     image = 'img_book' << rand(1..25).to_s << '.png'
+#     category_id = 4
+#     author_id = 1
+#     Book.create!(title: title,
+#                  description: description,
+#                  price: price,
+#                  image: image,
+#                  in_stock: in_stock,
+#                  category_id: category_id,
+#                  author_id: author_id
+#                  )
+#   end

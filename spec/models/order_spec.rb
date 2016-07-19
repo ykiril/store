@@ -29,7 +29,7 @@ RSpec.describe Order, type: :model do
   
     it 'calls after change order state to in_queue' do
       expect(order).to receive(:set_time_and_ref)
-      order.pay_order
+      order.create_order
     end
   end
   

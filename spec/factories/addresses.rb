@@ -1,3 +1,5 @@
+require 'ffaker'
+
 FactoryGirl.define do
   factory :address, aliases: [:billing_address, :shipping_address] do
     first_name FFaker::Name.first_name

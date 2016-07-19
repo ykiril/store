@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
          :omniauthable, :omniauth_providers => [:facebook]
@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   
   validates :email, presence: true
   
-  ### возможно объединить?
   def billing_address
     super || Address.new
   end
@@ -37,7 +36,6 @@ class User < ActiveRecord::Base
       user = create(email: email, provider: auth.provider, uid: auth.uid.to_s)
     end
   end
-  
   
   def password_required?
     super && provider.blank?
