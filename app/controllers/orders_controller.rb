@@ -2,9 +2,9 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:show]
   before_action :check_order_in_progress, only: [:edit, :update]
   
-  def index
-    @order = order_in_progress
-  end
+  # def index
+  #   @order = order_in_progress
+  # end
   
   def show
     @order = Order.find(params[:id]).decorate

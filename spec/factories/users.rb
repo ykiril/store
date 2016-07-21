@@ -8,4 +8,9 @@ FactoryGirl.define do
     billing_address nil
     shipping_address nil
   end
+  
+  trait :admin do
+    admin true
+  end
+
 end
