@@ -4,8 +4,7 @@
     %ul.nav.navbar-nav.navbar-left
       %li= link_to "HOME", root_path
       %li= link_to "SHOP", books_path
-    %ul.nav.navbar-nav.navbar-center
-      = render('shared/cart')
+      %li= render('shared/cart')
     - if user_signed_in?
       %ul.nav.navbar-nav.navbar-right
         %li= link_to "Settings", edit_user_path

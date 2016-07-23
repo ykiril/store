@@ -16,7 +16,7 @@
 //= require jquery.bxslider.min
 //= require_tree .
 
-$(document).load(function(){
+$(document).ready(function(){
   function sliderInit() {
   	$('.bxslider').bxSlider({
 		  auto: true,

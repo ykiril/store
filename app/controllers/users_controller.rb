@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    assign_address_to_user
     if @user.update(user_params)
       flash[:notice] = t('user.flashes.account_updated')
       redirect_to edit_user_path
@@ -29,6 +30,15 @@ class UsersController < ApplicationController
   end
   
   private
+  
+  def assign_address_to_user
+    case user_params.keys[0]
+    when 'billing_address_attributes'
+      @user.billing_address = Address.create(user_params['billing_address_attributes'])
+    when 'shipping_address_attributes'
+      @user.shipping_address = Address.create(user_params['shipping_address_attributes'])
+    end
+  end
   
   def find_user
     @user = current_user    

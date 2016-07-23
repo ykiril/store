@@ -22,6 +22,6 @@ class OrderHistory
   private
 
   def orders
-    @_orders ||= @user.orders
+    @user.orders
   end
 end
