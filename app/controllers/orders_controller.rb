@@ -28,6 +28,7 @@ class OrdersController < ApplicationController
         redirect_to cart_path
       end
     else
+      flash.now[:danger] = "Invalid coupon code."
       render 'edit'
     end
   end

@@ -6,9 +6,17 @@ module AcceptenceHelper
     click_on 'Log in'
   end
   
-  def add_book_to_cart
+  def mock_auth_hash(email = 'new@user.com')
+    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
+      provider: 'facebook',
+      uid: '1235456',
+      info: { email: email }
+    )
+  end
+  
+  def add_book_to_cart(book)
     visit(book_path(book))
-    click_on('Add to cart')
+    click_on('ADD TO CART')
   end
   
   def fill_in_address_for(address_type)

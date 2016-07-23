@@ -16,7 +16,7 @@
 //= require jquery.bxslider.min
 //= require_tree .
 
-$(document).ready(function(){
+$(document).load(function(){
   function sliderInit() {
   	$('.bxslider').bxSlider({
 		  auto: true,
@@ -25,12 +25,14 @@ $(document).ready(function(){
   }
 	
 	sliderInit();
-	var url = window.location.pathname;
+	// var url = window.location.pathname;
 	
-	$('ul.nav a').on('click', function() {
-			if (url == '/') {
-				sliderInit();
+	$('ul.nav a').on('click', function(e) {
+			if (e.target.innerText == 'HOME') {
+				$('.bxslider').bxSlider({
+				  auto: true,
+				  pause: 5000
+				});
 			}		
 	})
-
 });

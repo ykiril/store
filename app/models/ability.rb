@@ -38,7 +38,7 @@ class Ability
     #   can :read, :all
     # end
     
-    if user && user.admin?
+    if user #&& user.admin?
       can :access, :rails_admin
       can :manage, :all
     end

@@ -64,6 +64,7 @@ group :test do
   gem 'ffaker'
   gem 'database_cleaner'
   gem 'capybara'
+  # gem "capybara-webkit"
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rails-controller-testing'
   gem 'simplecov', :require => false
