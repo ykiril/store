@@ -17,11 +17,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   # Process files as they are uploaded:
-  process :resize_to_fill => [300, 300]
+  process :resize_to_fill => [170, 200]
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process :resize_to_fit => [150, 150]
+    process :resize_to_fit => [160, 160]
   end
 
   def extension_white_list

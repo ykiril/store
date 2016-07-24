@@ -52,10 +52,10 @@ en:
   menu_title: Shop by category
   user:
     orders:
-      in_progress: In progress
-      in_queue: Waiting for processing
-      in_delivery: In Delivery
-      delivered: Delivered
+      in_progress: IN PROGRESS
+      in_queue: WAITING FOR PROCESSING
+      in_delivery: IN DELIVERY
+      delivered: DELIVERED
       orders: Orders
       go_to_cart: GO TO CART
       empty_in_progress: There are not orders in progress.

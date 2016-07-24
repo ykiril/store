@@ -1,5 +1,6 @@
 class Book < ActiveRecord::Base
   validates :title, :price, :in_stock, presence: true
+  delegate  :full_name, to: :author, prefix: true, allow_nil: true
   
   has_many :author
   belongs_to :category

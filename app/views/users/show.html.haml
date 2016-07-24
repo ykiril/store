@@ -7,7 +7,7 @@
       %p= t('user.orders.empty_in_progress')
     - else
       = render('orders/order_in_progress', order: @history.orders_in_progress)
-      // = link_to t('user.orders.go_to_cart'), cart_path, class: 'btn btn-success'
+      = link_to t('user.orders.go_to_cart'), cart_path, class: 'btn btn-success'
     
     %h3.page-header= t('user.orders.in_queue')
     - if @history.orders_in_queue.empty?

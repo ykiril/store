@@ -22,8 +22,6 @@
 
     %tfoot
       %tr
-        %td{colspan: "4", align: "left"}
-          = link_to('GO TO CART', cart_path, class: 'btn btn-success')
         %td{colspan: "4", align: "right"}
           %b= t('order.order_total')
         %td= number_to_currency(order.total)

@@ -28,6 +28,6 @@
         
     .pull-right
       .form-inline
-        = f.text_field :code, placeholder: 'Coupon code', class: 'form-control'
-        = f.submit 'Update', class: "btn btn-success"
-        = f.submit 'Checkout', name: 'checkout', class: "btn btn-primary"
+        = f.text_field :code, placeholder: 'Coupon code', class: 'form-control coupon'
+        = f.submit 'Update', class: "btn btn-success update"
+        = f.submit 'Checkout', name: 'checkout', class: "btn btn-primary checkout"
