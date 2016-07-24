@@ -25,7 +25,6 @@ $(document).ready(function(){
   }
 	
 	sliderInit();
-	// var url = window.location.pathname;
 	
 	$('ul.nav a').on('click', function(e) {
 			if (e.target.innerText == 'HOME') {
@@ -35,4 +34,24 @@ $(document).ready(function(){
 				});
 			}		
 	})
+	
+	var url = window.location.pathname;
+  $('ul.nav > li').removeClass('active');
+
+  if (url.indexOf('/books') !== -1) {
+    $('.shop').addClass('active');
+  } else if (url.indexOf('/cart') !== -1) {
+    $('.cart').addClass('active');
+  } else if(url.indexOf('user/edit') !== -1) {
+  	$('.settings').addClass('active');
+  } else if(url.indexOf('users/sign_in') !== -1) {
+  	$('.sign-in').addClass('active');
+  } else if(url.indexOf('users/sign_up') !== -1) {
+  	$('.sign-up').addClass('active');
+  }	else if(url.indexOf('user') !== -1) {
+  	$('.orders').addClass('active');
+  } else if(url.indexOf('/') !== -1) {
+  	$('.home').addClass('active');
+  }
+
 });
