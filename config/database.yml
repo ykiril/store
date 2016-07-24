@@ -25,7 +25,10 @@ test:
 
 
 production:
-  <<: *default
-  #database: db/production.sqlite3 #should be change
-  database: store_development
-  # password: 'RG2016'
+  adapter: postgresql
+  database: deqn51cb5eu63a
+  pool: 5
+  timeout: 5000
+  username: nguigrcvhdmsel
+  password: K55SnQxRahh1_Dnpp3xsQALq_P
+  host: ec2-54-228-226-93.eu-west-1.compute.amazonaws.com
