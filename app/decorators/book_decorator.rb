@@ -9,6 +9,6 @@ class BookDecorator < Draper::Decorator
   end
   
   def author_name
-    object.author.first.full_name
+    object.author.map { |a| a.full_name }.join(', ')
   end
 end

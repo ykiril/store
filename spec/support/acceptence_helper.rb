@@ -32,8 +32,8 @@ module AcceptenceHelper
   
   def fill_in_credit_card
     fill_in 'Card number', with: '1111111111111111'
-    select '12', from: 'checkout_form_credit_card_attributes_month'
-    select '2020', from: 'checkout_form_credit_card_attributes_year'
-    fill_in 'Card code', with: '1234'
+    select '12', from: 'checkout_form_credit_card_attributes_exp_month'
+    select '2020', from: 'checkout_form_credit_card_attributes_exp_year'
+    fill_in 'CVV code', with: '123'
   end
 end

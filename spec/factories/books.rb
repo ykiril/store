@@ -11,12 +11,12 @@ FactoryGirl.define do
     factory :book_with_order do
       transient do
         quantity 1
+        author_id FactoryGirl.create(:author, first_name: 'Test_name', last_name: 'Test_name')
       end
       
       after(:create) do |book, evaluator| 
         FactoryGirl.create(:order_book, book: book, quantity: evaluator.quantity)
       end
     end
-    
   end
 end
