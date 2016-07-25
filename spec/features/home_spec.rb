@@ -3,11 +3,7 @@ require_relative 'features_helper'
 feature 'Home', js: true do
   given!(:book) { create(:book_with_order, quantity: 2).decorate }
   given!(:book2) { create(:book_with_order, title: 'Some book').decorate }
-  
-  it 'test' do
-    expect(page).to have_selector :css, 'div.book-slider'
-  end
-  
+
   scenario 'user can see best sellers' do
     visit(root_path)
     
@@ -20,7 +16,7 @@ feature 'Home', js: true do
   end
   
   scenario 'user can navigate between carousel items' do
-    visit(root_path)
+    visit('root_path')
 
     within('.book-slider') do
       find('.bx-next').click
